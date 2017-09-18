@@ -7,18 +7,16 @@ import sys
 import re
 import shutil
 
-def before_disp(dir_list,s):
+def before_disp(dir_list):
     print("* ファイル名をブランク除去変換 *")
     print("-- 変換前 -------------------------------")
     for entry in dir_list:
-        if entry.count(s):
-            print(entry)
+        print(entry)
 
-def after_disp(dir_list,s):
+def after_disp(dir_list):
     print("-- 変換後 -------------------------------")
     for entry in dir_list:
-        if entry.count(s):
-            print(re.sub(r"\s+","",entry))
+        print(re.sub(r"\s+","",entry))
     print("----------------------------------------")
 
 def yes_no_input(s):
@@ -29,12 +27,11 @@ def yes_no_input(s):
         elif choice in ['n', 'no']:
             return False
 
-def file_rename(dir_list,s):
+def file_rename(dir_list):
     if yes_no_input("\nファイル名を変換して良いですか? [y/N]: "):
         for entry in dir_list:
-            if entry.count(s):
-                print(re.sub(r"\s+","",entry))
-                shutil.move(entry,re.sub(r"\s+","",entry))
+            print(re.sub(r"\s+","",entry))
+            #shutil.move(entry,re.sub(r"\s+","",entry))
 
         print("\n** 変換を終了しました**")
 
@@ -51,8 +48,9 @@ if (len(sys.argv) != 2):
 
 s = sys.argv[1]
 dir_list = os.listdir()
+new_d_list = [l for l in dir_list if s in l]
 
-before_disp(dir_list,s)
-after_disp(dir_list,s)
+before_disp(new_d_list)
+after_disp(new_d_list)
 
-file_rename(dir_list,s)
+file_rename(new_d_list)
