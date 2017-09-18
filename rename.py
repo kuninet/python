@@ -34,7 +34,7 @@ def file_rename(dir_list,s):
         for entry in dir_list:
             if entry.count(s):
                 print(re.sub(r"\s+","",entry))
-#                shutil.move(entry,re.sub(r"\s+","",entry))
+                shutil.move(entry,re.sub(r"\s+","",entry))
 
         print("\n** 変換を終了しました**")
 
