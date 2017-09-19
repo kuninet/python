@@ -15,33 +15,26 @@ def yes_no_input(s):
         elif choice in ['n', 'no']:
             return False
 
-def print_entry(entry):
-    print(entry)
-
 def print_nobrank_entry(entry):
     print(re.sub(r"\s+","",entry))
-
-def rename_entry(entry):
-    print_nobrank_entry(entry)
-    shutil.move(entry,re.sub(r"\s+","",entry))
-
-def list_handler(d_list,func):
-    for entry in d_list:
-        func(entry)
     
 def before_disp(dir_list):
     print("* ファイル名をブランク除去変換 *")
     print("-- 変換前 -------------------------------")
-    list_handler(dir_list,print_entry)
+    for entry in dir_list:
+	    print(entry)
 
 def after_disp(dir_list):
     print("-- 変換後 -------------------------------")
-    list_handler(dir_list,print_nobrank_entry)
+    for entry in dir_list:
+	    print_nobrank_entry(entry)
     print("----------------------------------------")
 
 def file_rename(dir_list):
     if yes_no_input("\nファイル名を変換して良いですか? [y/N]: "):
-        list_handler(dir_list,rename_entry)
+        for entry in dir_list:
+            print_nobrank_entry(entry)
+            shutil.move(entry,re.sub(r"\s+","",entry))
         print("\n** 変換を終了しました**")
 
     else:
